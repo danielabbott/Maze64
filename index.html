@@ -1,0 +1,165 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<title>Maze64</title>
+
+	<style>
+
+		/* use these 2 for a regular html page */
+		/*#canv,#overlay {
+			position: absolute;
+    		width: 90vh;
+    		height: 90vh;
+    		top: 5vh;
+			left: calc(50% - 45vh);
+		}
+
+		@media (orientation: portrait) {
+			#canv,#overlay {
+	    		width: 90vw;
+	    		height: 90vw;
+	    		top: 5vw;
+				left: calc(50% - 45vw);
+			}
+		}*/
+
+		/* use this one for itch.io */
+		#canv,#overlay {
+			position: absolute;
+    		width: 100%;
+    		height: 100%;
+    		top: 0;
+			left: 0;
+		}
+
+		#overlay {
+			background-color: #ffffff00
+		}
+
+		img {
+			visibility: hidden;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<canvas id="canv"></canvas>
+	<div id="overlay"></div>
+
+	<audio id="sound_gravel" src="gravel.ogg" loop></audio>
+	<audio id="sound_hurt" src="hurt.ogg"></audio>
+	<audio id="sound_hurt2" src="hurt2.ogg"></audio>
+	<audio id="sound_hurt3" src="hurt3.ogg"></audio>
+	<audio id="sound_hurt4" src="hurt4.ogg"></audio>
+	<audio id="sound_laugh" src="laugh.ogg"></audio>
+	<audio id="sound_key" src="key.ogg"></audio>
+	<audio id="sound_enemy_hurt" src="enemy_hurt.ogg"></audio>
+	<audio id="sound_enemy_hurt2" src="enemy_hurt2.ogg"></audio>
+	<audio id="sound_whoosh" src="whoosh.ogg"></audio>
+	<audio id="sound_bgm" src="bgm.ogg" loop></audio>
+	<audio id="sound_dead_music" src="dead.ogg"></audio>
+	<audio id="sound_win_music" src="win.ogg"></audio>
+
+
+	<img id="easy" src="easy.png">
+	<img id="normal" src="normal.png">
+	<img id="hard" src="hard.png">
+
+	<img id="gravel" src="gravel.png">
+	<img id="hedge" src="hedge.png">
+	<img id="dark" src="dark.png">
+	<img id="heart" src="heart.png">
+	<img id="heart_half" src="heart_half.png">
+	<img id="heart_gone" src="heart_gone.png">
+	<img id="key" src="key.png">
+	<img id="nokey" src="nokey.png">
+
+	<img id="character_front_idle" src="character_front_idle.png">
+	<img id="character_front_walk1" src="character_front_walk1.png">
+	<img id="character_front_walk2" src="character_front_walk2.png">
+	<img id="character_back_idle" src="character_back_idle.png">
+	<img id="character_back_walk1" src="character_back_walk1.png">
+	<img id="character_back_walk2" src="character_back_walk2.png">
+	<img id="character_right_idle" src="character_right_idle.png">
+	<img id="character_right_walk1" src="character_right_walk1.png">
+	<img id="character_right_walk2" src="character_right_walk2.png">
+	<img id="character_right_walk3" src="character_right_walk3.png">
+	<img id="character_right_walk4" src="character_right_walk4.png">
+	<img id="character_left_idle" src="character_left_idle.png">
+	<img id="character_left_walk1" src="character_left_walk1.png">
+	<img id="character_left_walk2" src="character_left_walk2.png">
+	<img id="character_left_walk3" src="character_left_walk3.png">
+	<img id="character_left_walk4" src="character_left_walk4.png">
+	<img id="character_attack_front" src="character_attack_front.png">
+	<img id="character_attack_back" src="character_attack_back.png">
+	<img id="character_attack_right" src="character_attack_right.png">
+	<img id="character_attack_left" src="character_attack_left.png">
+
+	<img id="energy" src="energy.png">
+
+	<img id="enemy_a_front_idle" src="enemy_a_front_idle.png">
+	<img id="enemy_a_front_walk1" src="enemy_a_front_walk1.png">
+	<img id="enemy_a_front_walk2" src="enemy_a_front_walk2.png">
+	<img id="enemy_a_front_walk3" src="enemy_a_front_walk3.png">
+	<img id="enemy_a_back_idle" src="enemy_a_back_idle.png">
+	<img id="enemy_a_back_walk1" src="enemy_a_back_walk1.png">
+	<img id="enemy_a_back_walk2" src="enemy_a_back_walk2.png">
+	<img id="enemy_a_back_walk3" src="enemy_a_back_walk3.png">
+
+	<img id="enemy_a_right_idle" src="enemy_a_right_idle.png">
+	<img id="enemy_a_right_walk1" src="enemy_a_right_walk1.png">
+	<img id="enemy_a_right_walk2" src="enemy_a_right_walk2.png">
+	<img id="enemy_a_right_walk3" src="enemy_a_right_walk3.png">
+	<img id="enemy_a_right_walk4" src="enemy_a_right_walk4.png">
+	<img id="enemy_a_right_walk5" src="enemy_a_right_walk5.png">
+	<img id="enemy_a_right_walk6" src="enemy_a_right_walk6.png">
+	<img id="enemy_a_right_walk7" src="enemy_a_right_walk7.png">
+	<img id="enemy_a_left_idle" src="enemy_a_left_idle.png">
+	<img id="enemy_a_left_walk1" src="enemy_a_left_walk1.png">
+	<img id="enemy_a_left_walk2" src="enemy_a_left_walk2.png">
+	<img id="enemy_a_left_walk3" src="enemy_a_left_walk3.png">
+	<img id="enemy_a_left_walk4" src="enemy_a_left_walk4.png">
+	<img id="enemy_a_left_walk5" src="enemy_a_left_walk5.png">
+	<img id="enemy_a_left_walk6" src="enemy_a_left_walk6.png">
+	<img id="enemy_a_left_walk7" src="enemy_a_left_walk7.png">
+
+	<img id="enemy_a_attack_right" src="enemy_a_attack_right.png">
+	<img id="enemy_a_attack_left" src="enemy_a_attack_left.png">
+	<img id="enemy_a_attack_front" src="enemy_a_attack_front.png">
+	<img id="enemy_a_attack_back" src="enemy_a_attack_back.png">
+
+	<img id="enemy_a_death1" src="enemy_a_death1.png">
+	<img id="enemy_a_death2" src="enemy_a_death2.png">
+	<img id="enemy_a_death3" src="enemy_a_death3.png">
+	<img id="enemy_a_death4" src="enemy_a_death4.png">
+	<img id="enemy_a_death5" src="enemy_a_death5.png">
+
+	<img id="cdeath1" src="cdeath1.png">
+	<img id="cdeath2" src="cdeath2.png">
+	<img id="cdeath3" src="cdeath3.png">
+	<img id="cdeath4" src="cdeath4.png">
+
+	<img id="gateclosed" src="gateclosed.png">
+	<img id="gateopen" src="gateopen.png">
+	<img id="victory" src="victory.png">
+	<img id="youwin" src="youwin.png">
+	<img id="fail1" src="fail1.png">
+	<img id="fail2" src="fail2.png">
+
+
+
+	<script src="maze.js"></script>
+	<script src="mazedraw.js"></script>
+	<script src="entity.js"></script>
+	<script src="controls.js"></script>
+	<script src="hud.js"></script>
+	<script src="shake.js"></script>
+	<script src="sound.js"></script>
+	<script src="main.js"></script>
+
+
+</body>
+</html>

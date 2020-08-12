@@ -1,0 +1,7 @@
+Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+This license applies to all .png files.
+
+This license also applies to the .ogg files in that any modifications that I (Daniel Abbott) have made to the sound clips are licensed under the CC BY 4.0 license. See CREDITS.txt to see which sounds I have made alterations to (marked with '(modified)') and which are just clips from the original. Obviously the license of the original sound still applies and credit must be given to both the original sound creator and to me if you use the modified sounds in your own project.
+
