@@ -169,6 +169,8 @@ var last_frame_time = 0;
 var player_has_attacked = false
 var player_attack_cooldown_ends = 0
 
+var last_health_regen_time = 0
+
 function gameLoop(now) {
 
 	/* Frame rate and delta time */
@@ -243,8 +245,14 @@ function gameLoop(now) {
 		actual_view_pos[1] = clamp(actual_view_pos[1], 0, WORLD_SIZE-64)
 	}
 
-	if(!game_complete && all_entities.length < MAZE_GRID_SIZE*2) {
+	var max_entities = [Math.floor(MAZE_GRID_SIZE*1.3), MAZE_GRID_SIZE*2, MAZE_GRID_SIZE*2]
+	if(!game_complete && all_entities.length < max_entities[difficulty]) {
 		spawn_random_enemy()
+	}
+
+	if(difficulty == 0 && now-last_health_regen_time >= 10) {
+		last_health_regen_time = now
+		player_entity.health = clamp(player_entity.health+0.5, 0, player_entity.max_health)
 	}
 
 	get_viewport_dimensions()

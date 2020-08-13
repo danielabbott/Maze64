@@ -7,8 +7,7 @@ function draw_gravel() {
 		}
 	}
 	drawImage(keys_collected >= 3 ? gateopen:gateclosed, Math.floor(MAZE_GRID_SIZE/2)*MAZE_PATH_WIDTH, 0, 14, 14)
-	drawImage(victory, Math.floor((WORLD_SIZE/64)/2)*64+4+(player_entity.x%MAZE_PATH_WIDTH), -64, 64, 64)
-	// I don't know why the +4+(player_entity.x%MAZE_PATH_WIDTH) is needed but it works.
+	drawImage(victory, Math.floor((WORLD_SIZE/64)/2)*64 - 32, -64, 128, 64)
 }
 
 function draw_hedge_shadows() {
