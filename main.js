@@ -188,6 +188,10 @@ function gameLoop(now) {
 		return;
 	}
 
+	if(game_complete) {
+		player_entity.facing = 'up'
+	}
+
 	if(game_complete && player_entity.y < -40) {
 		if(!started_playing_win_music) {
 			started_playing_win_music = true

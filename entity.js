@@ -204,8 +204,9 @@ function move_entities(now, delta_time) {
 
 		var mx = Math.floor(e.x/MAZE_PATH_WIDTH)
 
-		if(!game_complete && e.type == 'player' && keys_collected >= 3 && e.y < MAZE_PATH_WIDTH-6
-				&& mx == Math.floor(MAZE_GRID_SIZE/2)) {
+		if(!game_complete && e.type == 'player' && keys_collected >= 3 && e.y <= MAZE_PATH_WIDTH
+				&& e.x >= Math.floor(MAZE_GRID_SIZE/2)*MAZE_PATH_WIDTH+1
+				&& e.x+e.w < Math.floor(MAZE_GRID_SIZE/2)*MAZE_PATH_WIDTH+MAZE_PATH_WIDTH) {
 			game_complete = true
 			// kill all enemies
 			all_entities.forEach(function(e2) {
